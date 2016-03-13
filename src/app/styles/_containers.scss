@@ -1,0 +1,10 @@
+
+html, body, #view, .container{
+	@extend .inline-el;
+	@extend .full-size;
+}
+
+.room{
+	@extend .full-size;
+	position: absolute;
+}

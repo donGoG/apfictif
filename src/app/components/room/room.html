@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="{{svg.width}}" height="{{svg.width}}" class="{{room.class}} room">
+	<circle ng-repeat="circle in room.circles" 
+	    ng-attr-cx="{{circle.posX}}" 
+	    ng-attr-cy="{{circle.posY}}" 
+	    ng-attr-r="{{room.radius}}"
+	    fill="none">
+	</circle>
+</svg>
