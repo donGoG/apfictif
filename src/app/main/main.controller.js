@@ -1,12 +1,44 @@
 export class MainController {
-  constructor ($log, $scope, $window) {
+  constructor ($log, $scope, $window, settings) {
     'ngInject';
     $log.debug('main Ctrl');
 
-    $scope.steps = [60, 30, 100, 60, 10, 80];
+    $scope.directions = 4;
+    $scope.calculated = 0;
+
+    this.initFirstRoom($scope, settings, $window);
+
+    $scope.$on('circle ready', function(){
+      $scope.calculated ++;
+    });
+
+    $scope.$on('room ready', function(e, id){
+      if(id<settings.rooms.length-1) this.createRoom($scope, settings, id+1);
+    }.bind(this));
+
+    $scope.$on('new config', function(e, config){
+      $scope.directions = config.directions;
+      for(var i=0; i<settings.rooms.length; i++){
+        settings.rooms[i].size = config.rooms[i].size;
+      }
+      this.resetRooms($scope);
+      this.initFirstRoom($scope, settings, $window);
+    }.bind(this));
+
+    $scope.$on('new colours', function(e, config){
+      for(var i=0; i<settings.rooms.length; i++){
+        $scope.$broadcast('room '+i+' config', config.rooms[i]);
+      }
+    }.bind(this));
+
+  }
+
+  initFirstRoom($scope, settings, $window){
+
     $scope.rooms = [
       {
-        radius: $scope.steps[0],
+        id: 0,
+        radius: settings.rooms[0].size * settings.sizeRatio,
         circles: [{
           posX: $window.innerWidth/2,
           posY: $window.innerHeight/2
@@ -14,36 +46,43 @@ export class MainController {
         class: 'room-0'
       }
     ];
+  }
 
-    var precision = 4;
+  resetRooms($scope){
+    $scope.calculated = 0;
+    $scope.rooms = [];
+  }
 
-    for(var r=1; r<$scope.steps.length; r++){ 
-    // ITERATE OVER ROOMS
+  createRoom($scope, settings, id){
       
-      var newCircles = [];
-      for(var c=0; c<$scope.rooms[r-1].circles.length; c++){ 
-      // ITERATE OVER CIRCLES OF THE PREVIOUS ROOM
-        
-        for(var angle=0; angle <= 2*Math.PI - Math.PI/precision; angle+=Math.PI/precision){ 
-        // CREATE CIRCLES OF THE CURRENT ROOM
+    var previousRoom = $scope.rooms[id-1];
+    var newCircles = [];
 
-          var newX = $scope.rooms[r-1].circles[c].posX + $scope.rooms[r-1].radius * Math.cos(angle);
-          var newY = $scope.rooms[r-1].circles[c].posY + $scope.rooms[r-1].radius * Math.sin(angle);
-          newCircles.push({
-            posX: newX,
-            posY: newY
-          });
+    for(var c=0; c < previousRoom.circles.length; c++){ 
+    // ITERATE OVER CIRCLES OF THE PREVIOUS ROOM
 
-        }
+      var parentCircle = $scope.rooms[id-1].circles[c];
+      
+      for(var step=0; step<$scope.directions; step++){ 
+      // CREATE CIRCLES OF THE CURRENT PARENT CIRCLE
+
+        var newX = parentCircle.posX + previousRoom.radius * Math.cos(2 * Math.PI * step / $scope.directions);
+        var newY = parentCircle.posY + previousRoom.radius * Math.sin(2 * Math.PI * step / $scope.directions);
+        newCircles.push({
+          posX: newX,
+          posY: newY
+        });
+
       }
-
-      $scope.rooms.push({
-        radius: $scope.steps[r],
-        circles: newCircles,
-        class: 'room-'+r
-      });
-
     }
 
+    $scope.rooms.push({
+      id: id,
+      radius: settings.rooms[id].size * settings.sizeRatio,
+      circles: newCircles,
+      class: 'room-'+id
+    });
+
   }
+
 }

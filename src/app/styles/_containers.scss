@@ -4,7 +4,13 @@ html, body, #view, .container{
 	@extend .full-size;
 }
 
+.ui-container{
+	padding: 10px;
+	position: fixed;
+	z-index: 20;
+}
+
 .room{
 	@extend .full-size;
-	position: absolute;
+	position: fixed;
 }

@@ -1,3 +1,47 @@
 <div class="container">
+	<div class="ui-container" ng-controller="UIController">
+		<b>{{calculated}} cercles dessinés</b>
+
+		<br /><br />
+		<form novalidate class="simple-form">
+			<u>Directions :</u>
+			<input type="range" 
+				   ng-model="config.directions"
+				   value="1" 
+				   max="8" 
+				   min="1" 
+				   step="1" />
+			<span>{{config.directions}}</span>
+			<br /><br />
+
+			<div class="room-modifier" ng-repeat="(key, room) in config.rooms">
+				<u>Pièce n°{{key+1}} :</u>
+				<br />
+				Nb de pas : <input type="range" 
+					   ng-model="config.rooms[key].size"
+					   max="20" 
+					   min="1" 
+					   step="0.5" />
+				<span>{{config.rooms[key].size}}</span>
+				<br />
+				opacité : <input type="range" 
+					   ng-model="config.rooms[key].opacity"
+					   ng-change="updateColours(config)"
+					   value="0.5" 
+					   max="1" 
+					   min="0" 
+					   step="0.05" />
+				<span>{{config.rooms[key].opacity}}</span>
+				<br />
+				<input type="color" ng-model="config.rooms[key].colour" ng-change="updateColours(config)">
+				<br /><br />
+			</div>
+
+			<br />
+			<input type="submit" ng-click="update(config)" value="valider" />
+		</form>
+
+	</div>
+	
 	<room ng-repeat="room in rooms" room=room></room>
 </div>
