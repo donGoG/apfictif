@@ -5,8 +5,10 @@ export class UIController {
 
     $scope.master = {};
     $scope.config = {
-      directions: 4,
-      rooms: settings.rooms
+      scale: settings.scale,
+      directions: settings.directions,
+      rooms: settings.rooms,
+      center: settings.center
     };
 
     $scope.update = function(config) {
@@ -20,6 +22,9 @@ export class UIController {
     }
 
     $scope.updateConf = function(config){
+      settings.scale = config.scale;
+      settings.directions = config.directions;
+      settings.center = config.center;
       settings.rooms = config.rooms;
     }
   }

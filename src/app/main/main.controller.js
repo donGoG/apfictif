@@ -3,7 +3,6 @@ export class MainController {
     'ngInject';
     $log.debug('main Ctrl');
 
-    $scope.directions = 4;
     $scope.calculated = 0;
 
     this.initFirstRoom($scope, settings, $window);
@@ -17,7 +16,7 @@ export class MainController {
     }.bind(this));
 
     $scope.$on('new config', function(e, config){
-      $scope.directions = config.directions;
+      settings.directions = config.directions;
       for(var i=0; i<settings.rooms.length; i++){
         settings.rooms[i].size = config.rooms[i].size;
       }
@@ -38,12 +37,13 @@ export class MainController {
     $scope.rooms = [
       {
         id: 0,
-        radius: settings.rooms[0].size * settings.sizeRatio,
+        radius: settings.rooms[0].size * settings.scale,
         circles: [{
           posX: $window.innerWidth/2,
           posY: $window.innerHeight/2
         }],
-        class: 'room-0'
+        class: 'room-0',
+        name: settings.rooms[0].name
       }
     ];
   }
@@ -63,11 +63,11 @@ export class MainController {
 
       var parentCircle = $scope.rooms[id-1].circles[c];
       
-      for(var step=0; step<$scope.directions; step++){ 
+      for(var step=0; step<settings.directions; step++){ 
       // CREATE CIRCLES OF THE CURRENT PARENT CIRCLE
 
-        var newX = parentCircle.posX + previousRoom.radius * Math.cos(2 * Math.PI * step / $scope.directions);
-        var newY = parentCircle.posY + previousRoom.radius * Math.sin(2 * Math.PI * step / $scope.directions);
+        var newX = parentCircle.posX + previousRoom.radius * Math.cos(2 * Math.PI * step / settings.directions);
+        var newY = parentCircle.posY + previousRoom.radius * Math.sin(2 * Math.PI * step / settings.directions);
         newCircles.push({
           posX: newX,
           posY: newY
@@ -78,9 +78,10 @@ export class MainController {
 
     $scope.rooms.push({
       id: id,
-      radius: settings.rooms[id].size * settings.sizeRatio,
+      radius: settings.rooms[id].size * settings.scale,
       circles: newCircles,
-      class: 'room-'+id
+      class: 'room-'+id,
+      name: settings.rooms[id].name
     });
 
   }

@@ -16,6 +16,7 @@ export function RoomDirective(settings) {
   function linkFunc(scope, elem) {
 
     angular.element(elem)[0].style.stroke = settings.rooms[scope.room.id].colour;
+    angular.element(elem)[0].style.fill = settings.rooms[scope.room.id].colour;
     angular.element(elem)[0].style.opacity = settings.rooms[scope.room.id].opacity;
 
     scope.$on('room '+scope.room.id+' config', function(e, data){

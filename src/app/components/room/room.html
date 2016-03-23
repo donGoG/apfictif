@@ -1,8 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="{{svg.width}}" height="{{svg.width}}" class="{{room.class}} room">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="{{svg.width}}" height="{{svg.width}}" class="{{room.class}} room"
+>
 	<circle ng-repeat="circle in room.circles" circlecreator
 	    ng-attr-cx="{{circle.posX}}" 
 	    ng-attr-cy="{{circle.posY}}" 
 	    ng-attr-r="{{room.radius}}"
 	    fill="none">
 	</circle>
+
+	<line x1="{{svg.width-130}}" y1="{{room.id*30+26}}" x2="{{svg.width-110}}" y2="{{room.id*30+26}}" />
+	<text id="text-{{room.id}}" x="{{svg.width-100}}" y="{{room.id*30+30}}">{{room.name}}</text>
 </svg>

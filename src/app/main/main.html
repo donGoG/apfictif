@@ -4,6 +4,15 @@
 
 		<br /><br />
 		<form novalidate class="simple-form">
+			<u>Echelle :</u>
+			<input type="range" 
+				   ng-model="config.scale"
+				   max="20" 
+				   min="1" 
+				   step="1" />
+			<span>(1pas = {{config.scale}}px)</span>
+			<br />
+
 			<u>Directions :</u>
 			<input type="range" 
 				   ng-model="config.directions"
@@ -14,10 +23,13 @@
 			<span>{{config.directions}}</span>
 			<br /><br />
 
+			<u>Centre</u> : <input type="input" ng-model="config.center.name">
+			<br /><br />
+
 			<div class="room-modifier" ng-repeat="(key, room) in config.rooms">
-				<u>Pièce n°{{key+1}} :</u>
+				<u>Pièce n°{{key+1}}</u> : <input type="input" ng-model="config.rooms[key].name">
 				<br />
-				Nb de pas : <input type="range" 
+				nb de pas : <input type="range" 
 					   ng-model="config.rooms[key].size"
 					   max="20" 
 					   min="1" 
@@ -30,7 +42,7 @@
 					   value="0.5" 
 					   max="1" 
 					   min="0" 
-					   step="0.05" />
+					   step="0.01" />
 				<span>{{config.rooms[key].opacity}}</span>
 				<br />
 				<input type="color" ng-model="config.rooms[key].colour" ng-change="updateColours(config)">
