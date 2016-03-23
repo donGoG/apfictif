@@ -1,15 +1,14 @@
 'use strict';
 
-import http from 'http';
-import express from 'express';
-import gutil from 'gulp-util';
-import path from 'path';
-import fs from 'fs';
+var http = require('http');
+var express = require('express');
+var gutil = require('gutil');
+var path = require('path');
 
 let server = express();
 
 // log all requests to the console
-server.set('port', (3001));
+server.set('port', 3001);
 server.use(morgan('dev'));
 server.use(prerender.set('prerenderToken', 'gv2quGWQFjjOLsoyCuyT'));
 server.use(express.static(process.env.PWD + '/dist'));
