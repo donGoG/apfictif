@@ -2,8 +2,6 @@
 
 var http = require('http');
 var express = require('express');
-var gutil = require('gutil');
-var path = require('path');
 
 let server = express();
 
