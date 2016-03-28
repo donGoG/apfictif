@@ -31,4 +31,4 @@ s.on('error', function(err){
 
 s.listen(server.get('port'));
 
-export default server;
+// export default server;
