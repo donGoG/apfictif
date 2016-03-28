@@ -3,7 +3,7 @@
 var http = require('http');
 var express = require('express');
 
-let server = express();
+var server = express();
 
 // log all requests to the console
 server.set('port', 3001);
