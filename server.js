@@ -7,7 +7,6 @@ var server = express();
 
 // log all requests to the console
 server.set('port', 3001);
-server.use(prerender.set('prerenderToken', 'gv2quGWQFjjOLsoyCuyT'));
 server.use(express.static(process.env.PWD + '/dist'));
 
 // Serve index.html for all routes to leave routing up to Angular
