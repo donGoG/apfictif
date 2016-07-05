@@ -1,47 +1,65 @@
 const settings = {
+  colors: [
+    '#00c9e6', //blue
+    '#fd6c9e', //pink
+    '#98f997', //green
+    '#FFFF00' //yellow
+  ],
   center: {
-    name: 'chambre'
+    name: 'lit'
   },
   rooms: [
     {
-      size: 14,
-      colour: '#000', //black
-      opacity: 0.3,
+      size: 10,
+      colour: '#000',
+      opacity: 1,
       name: 'wc'
     },
     {
-      size: 12,
-      colour: '#000', //black
-      opacity: 0.3,
+      size: 6,
+      colour: '#000',
+      opacity: 0.8,
+      name: 'douche'
+    },
+    {
+      size: 8,
+      colour: '#000',
+      opacity: 0.6,
+      name: 'penderie'
+    },
+    {
+      size: 11,
+      colour: '#000',
+      opacity: 0.5,
       name: 'cuisine'
     },
     {
-      size: 7,
-      colour: '#fd6c9e', //pink
-      opacity: 0.7,
-      name: 'salon'
+      size: 4,
+      colour: '#000',
+      opacity: 0.4,
+      name: 'canapé'
     },
     {
-      size: 10,
-      colour: '#00c9e6', //blue
-      opacity: 0.7,
-      name: 'salle de bain'
+      size: 9,
+      colour: '#000',
+      opacity: 0.3,
+      name: 'porte'
     },
     {
-      size: 7,
-      colour: '#98f997', //green
-      opacity: 0.85,
-      name: 'entrée'
+      size: 2,
+      colour: '#000', 
+      opacity: 0.2,
+      name: 'fenetre'
     },
     {
-      size: 3,
-      colour: '#FFFF00', //yellow
-      opacity: 0.6,
-      name: 'sortie'
+      size: 2,
+      colour: '#000', 
+      opacity: 0.1,
+      name: 'porte'
     }
   ],
-  directions: 6,
-  scale: 8
+  directions: 1,
+  scale: 7.5
 };
 
 export default settings;

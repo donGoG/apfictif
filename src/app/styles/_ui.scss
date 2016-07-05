@@ -1,0 +1,59 @@
+
+.submit{
+	@include size($button-w, $button-h);
+	@extend .button;
+	position: fixed;
+	bottom: 20px;
+	left: $menu-w + $margin-size*3;
+
+	background: $black;
+	color: $white;
+	border: none;
+
+	cursor: pointer;
+
+	font-size: 20px;
+}
+
+.room-modifier{
+
+	border-bottom: 1px solid $white;
+	margin-bottom: $margin-size;
+	padding-bottom: $margin-size;
+
+	&:last-of-type{
+		border-bottom: none;
+	}
+
+
+
+	.title{
+		width: 100%;
+	}
+	.label{
+		display: inline-block;
+		width: 75px;
+	}
+	.range{
+		// float: right;
+		margin-left: $margin-size/2;
+	}
+	.num{
+		// float: right;
+	}
+	.color{
+		cursor: pointer;
+		background-color: transparent;
+		border: none;
+		margin-top: $margin-size/2;
+		height: 40px;
+	}
+}
+
+.input-text{
+	// background: transparent;
+	// color: $b;
+	border: 1px solid $white;
+	padding: 5px;
+	font-size: 16px;
+}

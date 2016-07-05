@@ -4,16 +4,19 @@
 
 		<br /><br />
 		<form novalidate class="simple-form">
-			<u>Echelle :</u>
+			Echelle :
 			<input type="range" 
 				   ng-model="config.scale"
 				   max="20" 
 				   min="1" 
-				   step="1" />
+				   step="0.5" />
+			<br>
 			<span>(1pas = {{config.scale}}px)</span>
+			
+			<br>
 			<br />
 
-			<u>Directions :</u>
+			Directions :
 			<input type="range" 
 				   ng-model="config.directions"
 				   value="1" 
@@ -23,34 +26,41 @@
 			<span>{{config.directions}}</span>
 			<br /><br />
 
-			<u>Centre</u> : <input type="input" ng-model="config.center.name">
+			Centre : <input class="input-text" type="input" ng-model="config.center.name">
+			<br /><br />
 			<br /><br />
 
 			<div class="room-modifier" ng-repeat="(key, room) in config.rooms">
-				<u>Pièce n°{{key+1}}</u> : <input type="input" ng-model="config.rooms[key].name">
+				<div class="title">Pièce n°{{key+1}} : <input type="input" class="input-text" ng-model="config.rooms[key].name"></div>
 				<br />
-				nb de pas : <input type="range" 
-					   ng-model="config.rooms[key].size"
-					   max="20" 
-					   min="1" 
-					   step="0.5" />
-				<span>{{config.rooms[key].size}}</span>
+				
+				<span class="label">nb de pas :</span> 
+				<input type="range" 
+					class="range" 
+					ng-model="config.rooms[key].size"
+					max="20" 
+					min="1" 
+					step="0.5" />
+				<span class="num">{{config.rooms[key].size}}</span>
+				
 				<br />
-				opacité : <input type="range" 
-					   ng-model="config.rooms[key].opacity"
-					   ng-change="updateColours(config)"
-					   value="0.5" 
-					   max="1" 
-					   min="0" 
-					   step="0.01" />
-				<span>{{config.rooms[key].opacity}}</span>
+
+				<span class="label">opacité :</span> 
+				<input type="range" 
+					class="range" 
+					ng-model="config.rooms[key].opacity"
+					ng-change="updateColours(config)"
+					value="0.5" 
+					max="1" 
+					min="0" 
+					step="0.01" />
+				<span class="num">{{config.rooms[key].opacity}}</span>
 				<br />
-				<input type="color" ng-model="config.rooms[key].colour" ng-change="updateColours(config)">
-				<br /><br />
+
+				<input class="color" type="color" ng-model="config.rooms[key].colour" ng-change="updateColours(config)">
 			</div>
 
-			<br />
-			<input type="submit" ng-click="update(config)" value="valider" />
+			<input class="submit" type="submit" ng-click="update(config)" value="valider" />
 		</form>
 
 	</div>

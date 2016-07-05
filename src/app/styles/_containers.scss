@@ -6,8 +6,13 @@ html, body, #view, .container{
 
 .ui-container{
 	padding: 10px;
-	position: fixed;
+	position: absolute;
 	z-index: 20;
+	padding: 20px;
+	background: $black;
+	color: $white;
+
+	width: $menu-w;
 }
 
 .room{

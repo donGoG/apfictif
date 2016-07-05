@@ -1,4 +1,29 @@
 
+@mixin size($w, $h){
+	width: $w;
+	height: $h;
+}
+
+@mixin custom-transition($property, $time: $anim-time, $curve: $curve){
+	-webkit-transition: $property $time;
+	-moz-transition: $property $time;
+	-ms-transition: $property $time;
+	-o-transition: $property $time;
+	transition: $property $time;
+
+	transition-timing-function: $curve;
+	-webkit-transition-timing-function: $curve;
+}
+
+.button{
+	@include custom-transition(opacity);
+	opacity: 1;
+
+	&:hover{
+		opacity: 0.75;
+	}
+}
+
 .inline-el{
 	display: inline-block;
 	position: relative;
